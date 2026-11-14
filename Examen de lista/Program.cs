@@ -138,52 +138,7 @@ namespace Examen_de_lista
                 Console.WriteLine($"Promedio de Precios: ${Precio.Average():F2}");
             }
 
-            static void Ordenlista()
-            {
-                if (Producto.Count == 0)
-                {
-                    Console.WriteLine("No hay productos registrados.");
-                    return;
-                }
-
-                Console.WriteLine("Opcion 1: Ordenar por Nombre");
-                Console.WriteLine("Opcion 2: Ordenar de Menor a Mayor");
-                Console.WriteLine("Opcion 3: Ordenar de Mayor a Menor");
-                Console.WriteLine();
-                Console.Write("Elige la opcion de orden: ");
-
-                int op;
-                while (!int.TryParse(Console.ReadLine(), out op))
-                {
-                    Console.Write("Entrada invalida. Elige la opcion de orden: ");
-                }
-
-
-                var pares = Producto.Zip(Precio, (n, p) => (Nombre: n, Precio: p));
-                List<(string Nombre, double Precio)> ordenado;
-
-                switch (op)
-                {
-                    case 1:
-                        ordenado = pares.OrderBy(x => x.Nombre, StringComparer.OrdinalIgnoreCase).ToList();
-                        break;
-                    case 2:
-                        ordenado = pares.OrderBy(x => x.Precio).ToList();
-                        break;
-                    case 3:
-                        ordenado = pares.OrderByDescending(x => x.Precio).ToList();
-                        break;
-                    default:
-                        Console.WriteLine("Opcion invalida.");
-                        return;
-                }
-
-                Producto = ordenado.Select(x => x.Nombre).ToList();
-                Precio = ordenado.Select(x => x.Precio).ToList();
-
-                Console.WriteLine("Lista ordenada correctamente.");
-                MostrarProductos();
-            }
+           
         }
     }
 }
